@@ -237,13 +237,13 @@ function FortyPage() {
       </header>
 
       {/* HERO */}
-      <section id="top" className="grain relative flex min-h-[92vh] items-center overflow-hidden">
+      <section id="top" className="grain relative z-0 flex min-h-[92vh] items-center overflow-hidden">
         <div
           aria-hidden
           className="pointer-events-none absolute -right-40 top-1/4 h-[38rem] w-[38rem] rounded-full opacity-[0.07]"
           style={{ background: "radial-gradient(circle, var(--gold) 0%, transparent 65%)" }}
         />
-        <div className="mx-auto w-full max-w-7xl px-5 pb-48 pt-24 sm:px-8 sm:pb-72 lg:pb-96">
+        <div className="mx-auto w-full max-w-7xl px-5 pb-40 pt-24 sm:px-8 sm:pb-56 lg:pb-64">
           <Reveal>
             <p className="eyebrow flex flex-wrap items-center gap-x-2 gap-y-1" aria-label="Strategy, Creative, Distribution">
               {PILLARS.map((pillar, index) => (
@@ -291,9 +291,10 @@ function FortyPage() {
       </section>
 
       {/* SERVICES — cards straddle hero / light section boundary */}
-      <section id="services" className="section-light relative overflow-visible px-5 pb-24 sm:px-8 sm:pb-32">
+      <section id="services" className="section-light relative overflow-visible px-5 pb-24 pt-12 sm:px-8 sm:pb-32 sm:pt-20">
+        <div aria-hidden className="absolute inset-x-0 top-0 h-[56%] bg-navy sm:h-[52%]" />
         {/* Floating breakout card composition */}
-        <div className="relative z-10 -mt-24 w-full overflow-visible sm:-mt-64 lg:-mt-72">
+        <div className="relative z-10 w-full overflow-visible">
           <div className="relative mx-auto grid w-full max-w-[95rem] grid-cols-3 items-stretch gap-3 overflow-x-auto px-5 py-6 sm:gap-5 lg:max-w-[90rem] lg:gap-10 lg:overflow-visible lg:px-8">
             {PILLARS.map((p, i) => {
               const layer = i === 1 ? "z-20" : "z-10";
