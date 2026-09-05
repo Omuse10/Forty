@@ -374,34 +374,6 @@ function FortyPage() {
         </div>
       </section>
 
-      {/* THE RESET */}
-      <section id="reset" className="grain relative overflow-hidden px-5 py-24 sm:px-8 sm:py-36">
-        <div
-          aria-hidden
-          className="pointer-events-none absolute left-1/2 top-1/2 h-[30rem] w-[30rem] -translate-x-1/2 -translate-y-1/2 rounded-full opacity-[0.08]"
-          style={{ background: "radial-gradient(circle, var(--gold) 0%, transparent 70%)" }}
-        />
-        <div className="relative mx-auto max-w-3xl border border-gold/30 px-6 py-16 text-center sm:px-14">
-          <Reveal>
-            <p className="eyebrow">The Reset</p>
-            <h2 className="display-xl mt-6 text-3xl sm:text-5xl">Your brand needs a reset.</h2>
-            <p className="mt-6 text-lg text-gold">Don't know what's wrong with your marketing? We do.</p>
-            <p className="mx-auto mt-6 max-w-xl text-sm leading-relaxed text-cream/65 sm:text-base">
-              45–60 minutes. We'll identify what's working, what's broken, and what's missing — and
-              leave you with 3 priority moves for your brand.
-            </p>
-            <a
-              href={BOOKING_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="mt-10 inline-block bg-gold px-10 py-4 text-[0.7rem] uppercase tracking-[0.24em] text-navy transition-opacity hover:opacity-90"
-            >
-              Book Your Reset
-            </a>
-          </Reveal>
-        </div>
-      </section>
-
       {/* ABOUT */}
       <section id="about" className="section-light px-5 py-24 sm:px-8 sm:py-32">
         <div className="mx-auto grid max-w-7xl gap-14 lg:grid-cols-[1fr_1fr] lg:gap-20">
@@ -415,12 +387,12 @@ function FortyPage() {
                 We start by understanding the problem, define the strongest direction, build the work,
                 and get it in front of the people who matter.
               </p>
-              <blockquote className="mt-10 border-l border-gold pl-6 font-display text-lg uppercase leading-snug tracking-[0.04em] text-navy sm:text-2xl">
+              <blockquote className="mt-12 flex min-h-48 items-end border-l-2 border-gold py-2 pl-6 font-display text-4xl uppercase leading-[0.94] tracking-[0.02em] text-navy sm:min-h-56 sm:pl-8 sm:text-5xl lg:min-h-64 lg:text-[4rem]">
                 Good marketing gets attention. Great brands earn attention.
               </blockquote>
             </Reveal>
           </div>
-          <Reveal delay={120} className="h-fit border border-navy/15 bg-navy p-7 text-cream sm:p-10" id="contact">
+          <Reveal delay={120} className="flex flex-col self-stretch border border-navy/15 bg-navy p-7 text-cream sm:p-10" id="contact">
             <p className="eyebrow">Free Consultation</p>
             <h2 className="display-xl mt-5 text-2xl sm:text-3xl">Schedule your free consultation.</h2>
             <p className="mt-4 text-sm leading-relaxed text-cream/65">
@@ -509,6 +481,34 @@ function FortyPage() {
           </article>
         </Reveal>
 
+      </section>
+
+      {/* THE RESET */}
+      <section id="reset" className="grain relative overflow-hidden px-5 py-24 sm:px-8 sm:py-36">
+        <div
+          aria-hidden
+          className="pointer-events-none absolute left-1/2 top-1/2 h-[30rem] w-[30rem] -translate-x-1/2 -translate-y-1/2 rounded-full opacity-[0.08]"
+          style={{ background: "radial-gradient(circle, var(--gold) 0%, transparent 70%)" }}
+        />
+        <div className="relative mx-auto max-w-3xl border border-gold/30 px-6 py-16 text-center sm:px-14">
+          <Reveal>
+            <p className="eyebrow">The Reset</p>
+            <h2 className="display-xl mt-6 text-3xl sm:text-5xl">Your brand needs a reset.</h2>
+            <p className="mt-6 text-lg text-gold">Don't know what's wrong with your marketing? We do.</p>
+            <p className="mx-auto mt-6 max-w-xl text-sm leading-relaxed text-cream/65 sm:text-base">
+              45–60 minutes. We'll identify what's working, what's broken, and what's missing — and
+              leave you with 3 priority moves for your brand.
+            </p>
+            <a
+              href={BOOKING_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-10 inline-block bg-gold px-10 py-4 text-[0.7rem] uppercase tracking-[0.24em] text-navy transition-opacity hover:opacity-90"
+            >
+              Book Your Reset
+            </a>
+          </Reveal>
+        </div>
       </section>
 
       {/* FOOTER */}
