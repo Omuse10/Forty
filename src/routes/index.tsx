@@ -1,7 +1,19 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState, type FormEvent } from "react";
 import useEmblaCarousel from "embla-carousel-react";
-import { ArrowLeft, ArrowRight, Compass, PenTool, Radio, type LucideIcon } from "lucide-react";
+import {
+  ArrowLeft,
+  ArrowRight,
+  Compass,
+  Layers,
+  PenTool,
+  Radio,
+  RotateCcw,
+  Send,
+  Target,
+  TrendingUp,
+  type LucideIcon,
+} from "lucide-react";
 import { Reveal } from "@/components/Reveal";
 import logo from "@/assets/forty-logo.png";
 import workIcode from "@/assets/work-icode.jpg";
@@ -143,11 +155,11 @@ const CASES: CaseStudy[] = [
 ];
 
 const METHOD = [
-  { n: "01", title: "Reset", lead: "Understand the problem.", body: "We audit the brand, audience, positioning, content and marketing ecosystem." },
-  { n: "02", title: "Define", lead: "Find the signal.", body: "We clarify what makes the brand different and what it should be known for." },
-  { n: "03", title: "Build", lead: "Turn the strategy into creative.", body: "Identity, campaigns, content and experiences." },
-  { n: "04", title: "Distribute", lead: "Put it in front of the right people.", body: "Social, digital, campaigns and community." },
-  { n: "05", title: "Evolve", lead: "Learn. Adapt. Grow.", body: "We measure what's working and continually improve." },
+  { title: "Reset", lead: "Understand the problem.", body: "We audit the brand, audience, positioning, content and marketing ecosystem.", icon: RotateCcw },
+  { title: "Define", lead: "Find the signal.", body: "We clarify what makes the brand different and what it should be known for.", icon: Target },
+  { title: "Build", lead: "Turn the strategy into creative.", body: "Identity, campaigns, content and experiences.", icon: Layers },
+  { title: "Distribute", lead: "Put it in front of the right people.", body: "Social, digital, campaigns and community.", icon: Send },
+  { title: "Evolve", lead: "Learn. Adapt. Grow.", body: "We measure what's working and continually improve.", icon: TrendingUp },
 ];
 
 function Logo({ className = "h-7" }: { className?: string }) {
@@ -424,22 +436,28 @@ function FortyPage() {
           <Reveal delay={80}>
             <h3 className="display-xl text-2xl text-navy sm:text-3xl">The FORTY method</h3>
           </Reveal>
-          <ol className="mt-8 flex gap-5 overflow-x-auto pb-4">
+          <ol className="mt-8 flex gap-10 overflow-x-auto pb-4">
             {METHOD.map((s, i) => (
               <Reveal
                 as="li"
-                key={s.n}
+                key={s.title}
                 delay={120 + i * 80}
-                className="grid min-w-48 grid-cols-[2.5rem_1fr] gap-3"
+                className="relative grid min-w-48 grid-cols-[2.5rem_1fr] gap-3"
               >
-                <span className="grid h-8 w-8 place-items-center rounded-full border border-gold font-display text-[0.65rem] tracking-[0.12em] text-gold">
-                  {s.n}
+                <span className="grid h-8 w-8 place-items-center rounded-full border border-gold text-gold">
+                  <s.icon className="h-4 w-4" strokeWidth={1.5} />
                 </span>
                 <div>
                   <h3 className="display-xl text-lg text-navy">{s.title}</h3>
                   <p className="mt-1 text-sm font-medium text-navy/80">{s.lead}</p>
                   <p className="mt-1 text-sm leading-relaxed text-navy/55">{s.body}</p>
                 </div>
+                {i < METHOD.length - 1 && (
+                  <span aria-hidden="true" className="absolute -right-8 top-3 flex items-center text-gold">
+                    <span className="h-px w-4 bg-gold" />
+                    <ArrowRight className="h-4 w-4" strokeWidth={1.5} />
+                  </span>
+                )}
               </Reveal>
             ))}
           </ol>
@@ -466,6 +484,29 @@ function FortyPage() {
               </div>
             </div>
           </div>
+        </Reveal>
+
+        <Reveal delay={180}>
+          <article className="mx-auto mt-16 grid max-w-5xl gap-8 rounded-[8px] border border-navy/15 bg-navy p-7 text-cream sm:p-10 md:grid-cols-[auto_1fr] md:items-center md:gap-10">
+            <div className="grid h-28 w-28 place-items-center rounded-full border border-gold/50 bg-navy-soft font-display text-2xl tracking-[0.16em] text-gold sm:h-36 sm:w-36 sm:text-3xl">
+              FL
+            </div>
+            <div>
+              <p className="eyebrow">Meet The Lead</p>
+              <h3 className="display-xl mt-4 text-2xl sm:text-3xl">FORTY Lead</h3>
+              <p className="mt-2 text-[0.65rem] uppercase tracking-[0.24em] text-gold">Founder &amp; CEO</p>
+              <a
+                href="mailto:ceo@forty.example"
+                className="mt-3 inline-block text-sm text-cream/70 transition-colors hover:text-gold"
+              >
+                ceo@forty.example
+              </a>
+              <p className="mt-5 max-w-2xl text-sm leading-relaxed text-cream/65 sm:text-base">
+                A strategy-first creative leader helping ambitious businesses find their signal, build
+                work people remember, and take it to the audiences that matter.
+              </p>
+            </div>
+          </article>
         </Reveal>
 
       </section>
