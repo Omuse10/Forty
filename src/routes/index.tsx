@@ -37,7 +37,14 @@ const NAV = [
   { label: "Contact", href: "#contact" },
 ];
 
-const CLIENTS = ["ICODE", "CLIENT 02", "CLIENT 03", "CLIENT 04", "CLIENT 05", "CLIENT 06"];
+const CLIENTS = [
+  { name: "iCode", mark: "iC" },
+  { name: "Client 02", mark: "02" },
+  { name: "Client 03", mark: "03" },
+  { name: "Client 04", mark: "04" },
+  { name: "Client 05", mark: "05" },
+  { name: "Client 06", mark: "06" },
+];
 
 type Pillar = {
   n: string;
@@ -444,14 +451,16 @@ function FortyPage() {
               Brands we've worked with
             </p>
             <div className="relative flex overflow-hidden">
-              <div className="marquee-track flex w-max shrink-0 items-center gap-16 pr-16">
-                {[...CLIENTS, ...CLIENTS].map((c, i) => (
-                  <span
-                    key={`${c}-${i}`}
-                    className="whitespace-nowrap font-display text-sm uppercase tracking-[0.34em] text-navy/40"
-                  >
-                    {c}
-                  </span>
+              <div className="marquee-track flex w-max shrink-0 items-center gap-10 pr-10 sm:gap-16 sm:pr-16">
+                {[...CLIENTS, ...CLIENTS].map((client, i) => (
+                  <div key={`${client.name}-${i}`} className="flex shrink-0 items-center gap-3">
+                    <span className="grid h-11 w-11 place-items-center border border-navy/20 bg-navy text-xs font-semibold tracking-[0.04em] text-gold">
+                      {client.mark}
+                    </span>
+                    <span className="whitespace-nowrap font-display text-sm uppercase tracking-[0.22em] text-navy/55">
+                      {client.name}
+                    </span>
+                  </div>
                 ))}
               </div>
             </div>
