@@ -243,7 +243,7 @@ function FortyPage() {
           className="pointer-events-none absolute -right-40 top-1/4 h-[38rem] w-[38rem] rounded-full opacity-[0.07]"
           style={{ background: "radial-gradient(circle, var(--gold) 0%, transparent 65%)" }}
         />
-        <div className="mx-auto w-full max-w-7xl px-5 pb-40 pt-24 sm:px-8 sm:pb-56 lg:pb-64">
+        <div className="mx-auto w-full max-w-7xl px-5 pb-12 pt-24 sm:px-8 sm:pb-16 lg:pb-20">
           <Reveal>
             <p className="eyebrow flex flex-wrap items-center gap-x-2 gap-y-1" aria-label="Strategy, Creative, Distribution">
               {PILLARS.map((pillar, index) => (
@@ -292,7 +292,7 @@ function FortyPage() {
 
       {/* SERVICES — cards straddle hero / light section boundary */}
       <section id="services" className="section-light relative overflow-visible px-5 pb-24 pt-12 sm:px-8 sm:pb-32 sm:pt-20">
-        <div aria-hidden className="absolute inset-x-0 top-0 h-[56%] bg-navy sm:h-[52%]" />
+        <div aria-hidden className="absolute inset-x-0 top-0 h-[27%] bg-navy sm:h-[30%]" />
         {/* Floating breakout card composition */}
         <div className="relative z-10 w-full overflow-visible">
           <div className="relative mx-auto grid w-full max-w-[95rem] grid-cols-3 items-stretch gap-3 overflow-x-auto px-5 py-6 sm:gap-5 lg:max-w-[90rem] lg:gap-10 lg:overflow-visible lg:px-8">
@@ -350,7 +350,7 @@ function FortyPage() {
       </section>
 
       {/* SELECTED WORK */}
-      <section id="work" className="px-5 py-24 sm:px-8 sm:py-36">
+      <section id="work" className="section-light px-5 pb-24 pt-12 sm:px-8 sm:pb-36 sm:pt-16">
         <div className="mx-auto max-w-7xl">
           <Reveal>
             <p className="eyebrow">Proof, Not Promises</p>
@@ -579,7 +579,7 @@ function WorkCarousel() {
               aria-label={`View ${study.client}`}
               aria-current={selectedIndex === index ? "true" : undefined}
               className={`grid h-9 w-9 place-items-center border font-display text-[0.65rem] tracking-[0.15em] transition-colors ${
-                selectedIndex === index ? "border-gold bg-gold text-navy" : "border-border text-cream/60 hover:border-gold hover:text-gold"
+                selectedIndex === index ? "border-gold bg-gold text-navy" : "border-navy/20 text-navy/60 hover:border-gold hover:text-gold"
               }`}
             >
               {study.n}
@@ -592,7 +592,7 @@ function WorkCarousel() {
             onClick={() => emblaApi?.scrollPrev()}
             aria-label="Previous project"
             title="Previous project"
-            className="grid h-9 w-9 place-items-center border border-border text-cream transition-colors hover:border-gold hover:text-gold"
+            className="grid h-9 w-9 place-items-center border border-navy/20 text-navy transition-colors hover:border-gold hover:text-gold"
           >
             <ArrowLeft className="h-4 w-4" />
           </button>
@@ -601,7 +601,7 @@ function WorkCarousel() {
             onClick={() => emblaApi?.scrollNext()}
             aria-label="Next project"
             title="Next project"
-            className="grid h-9 w-9 place-items-center border border-border text-cream transition-colors hover:border-gold hover:text-gold"
+            className="grid h-9 w-9 place-items-center border border-navy/20 text-navy transition-colors hover:border-gold hover:text-gold"
           >
             <ArrowRight className="h-4 w-4" />
           </button>
@@ -616,7 +616,7 @@ function CaseCard({ study }: { study: CaseStudy }) {
   const expandable = !study.soon;
 
   return (
-    <article className="overflow-hidden border border-border bg-navy-soft/40 shadow-lg">
+    <article className="overflow-hidden rounded-[8px] border border-border bg-navy-soft/95 shadow-[0_18px_45px_-18px_rgba(11,21,38,0.55)]">
       <button
         type="button"
         onClick={() => expandable && setOpen((value) => !value)}
@@ -641,7 +641,7 @@ function CaseCard({ study }: { study: CaseStudy }) {
         )}
         <div className="flex flex-col justify-center gap-3 border-t border-border p-6 sm:p-8 md:border-l md:border-t-0">
           <span className="font-display text-xs tracking-[0.3em] text-gold">{study.n}</span>
-          <h3 className="display-xl text-xl sm:text-2xl">{study.client}</h3>
+          <h3 className="display-xl text-xl text-cream sm:text-2xl">{study.client}</h3>
           <p className="text-sm leading-relaxed text-cream/60">{study.hook}</p>
           <span className="mt-2 text-[0.65rem] uppercase tracking-[0.24em] text-gold">
             {expandable ? (open ? "Close case study —" : "Read the case study +") : "Coming Soon"}
