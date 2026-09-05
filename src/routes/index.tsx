@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState, type FormEvent } from "react";
-import { Compass, PenTool, Radio, type LucideIcon } from "lucide-react";
+import useEmblaCarousel from "embla-carousel-react";
+import { ArrowLeft, ArrowRight, Compass, PenTool, Radio, type LucideIcon } from "lucide-react";
 import { Reveal } from "@/components/Reveal";
 import logo from "@/assets/forty-logo.png";
 import workIcode from "@/assets/work-icode.jpg";
@@ -130,8 +131,8 @@ const CASES: CaseStudy[] = [
       },
     ],
   },
-  { n: "02", client: "Client TBD", hook: "Building a brand from zero.", soon: true },
-  { n: "03", client: "Client TBD", hook: "Repositioning an existing brand.", soon: true },
+  { n: "02", client: "Client TBD", hook: "Building a brand from zero.", image: workIcode, soon: true },
+  { n: "03", client: "Client TBD", hook: "Repositioning an existing brand.", image: workIcode, soon: true },
 ];
 
 const METHOD = [
@@ -235,7 +236,7 @@ function FortyPage() {
           className="pointer-events-none absolute -right-40 top-1/4 h-[38rem] w-[38rem] rounded-full opacity-[0.07]"
           style={{ background: "radial-gradient(circle, var(--gold) 0%, transparent 65%)" }}
         />
-        <div className="mx-auto w-full max-w-7xl px-5 pb-40 pt-24 sm:px-8 sm:pb-64 lg:pb-80">
+        <div className="mx-auto w-full max-w-7xl px-5 pb-48 pt-24 sm:px-8 sm:pb-72 lg:pb-96">
           <Reveal>
             <p className="eyebrow flex flex-wrap items-center gap-x-2 gap-y-1" aria-label="Strategy, Creative, Distribution">
               {PILLARS.map((pillar, index) => (
@@ -262,7 +263,7 @@ function FortyPage() {
             </p>
           </Reveal>
           <Reveal delay={260}>
-            <div className="mt-12 flex flex-col gap-4 sm:flex-row">
+            <div className="mt-16 flex flex-col gap-4 pb-8 sm:flex-row sm:pb-10">
               <a
                 href="#work"
                 className="bg-gold px-8 py-4 text-center text-[0.7rem] uppercase tracking-[0.24em] text-navy transition-opacity hover:opacity-90"
@@ -286,16 +287,16 @@ function FortyPage() {
       <section id="services" className="section-light relative overflow-visible px-5 pb-24 sm:px-8 sm:pb-32">
         {/* Floating breakout card composition */}
         <div className="relative z-10 -mt-24 w-full overflow-visible sm:-mt-64 lg:-mt-72">
-          <div className="relative mx-auto grid w-full max-w-[95rem] grid-cols-3 items-stretch gap-3 overflow-x-auto px-5 pb-6 sm:gap-5 lg:max-w-[90rem] lg:gap-10 lg:overflow-visible lg:px-8">
+          <div className="relative mx-auto grid w-full max-w-[95rem] grid-cols-3 items-stretch gap-3 overflow-x-auto px-5 py-6 sm:gap-5 lg:max-w-[90rem] lg:gap-10 lg:overflow-visible lg:px-8">
             {PILLARS.map((p, i) => {
               const layer = i === 1 ? "z-20" : "z-10";
               return (
                 <Reveal
                   key={p.title}
                   delay={i * 100}
-                  className={`relative ${layer} h-full min-w-[15rem]`}
+                  className={`relative ${layer} min-w-[15rem] self-stretch`}
                 >
-                  <article className="group flex h-full flex-col rounded-xl border border-navy/10 bg-cream p-4 shadow-[0_1px_2px_rgba(11,21,38,0.06),0_8px_24px_-12px_rgba(11,21,38,0.12)] transition-all duration-300 hover:-translate-y-1.5 hover:border-gold/40 hover:shadow-[0_2px_4px_rgba(11,21,38,0.06),0_20px_40px_-16px_rgba(11,21,38,0.22)] sm:p-8 lg:p-10">
+                  <article className="group flex min-h-full flex-col rounded-xl border border-navy/10 bg-cream p-4 pb-8 shadow-[0_1px_2px_rgba(11,21,38,0.06),0_8px_24px_-12px_rgba(11,21,38,0.12)] transition-all duration-300 hover:-translate-y-1.5 hover:border-gold/40 hover:shadow-[0_2px_4px_rgba(11,21,38,0.06),0_20px_40px_-16px_rgba(11,21,38,0.22)] sm:p-8 sm:pb-12 lg:p-10 lg:pb-14">
                     <div className="flex items-start justify-between">
                       <span className="grid h-10 w-10 place-items-center rounded-lg border border-gold/30 bg-gold/10 text-gold transition-colors duration-300 group-hover:bg-gold group-hover:text-navy sm:h-14 sm:w-14">
                         <p.icon className="h-4 w-4 sm:h-6 sm:w-6" strokeWidth={1.5} />
@@ -347,40 +348,9 @@ function FortyPage() {
             <p className="eyebrow">Proof, Not Promises</p>
             <h2 className="display-xl mt-6 text-3xl sm:text-5xl">Selected work</h2>
           </Reveal>
-          <div className="mt-16 space-y-6">
-            {CASES.map((c, i) => (
-              <Reveal key={c.n} delay={i * 80}>
-                <CaseCard study={c} />
-              </Reveal>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* METHOD */}
-      <section id="method" className="section-light px-5 py-24 sm:px-8 sm:py-32">
-        <div className="mx-auto max-w-7xl">
-          <Reveal>
-            <p className="eyebrow">How We Work</p>
-            <h2 className="display-xl mt-6 text-3xl text-navy sm:text-5xl">The FORTY method</h2>
+          <Reveal delay={80} className="mt-12">
+            <WorkCarousel />
           </Reveal>
-          <ol className="relative mt-16 grid gap-10 md:grid-cols-5 md:gap-6">
-            <span
-              aria-hidden
-              className="absolute left-[13px] top-3 bottom-3 w-px bg-navy/15 md:left-0 md:right-0 md:top-[13px] md:bottom-auto md:h-px md:w-full"
-            />
-            {METHOD.map((s, i) => (
-              <Reveal as="li" key={s.n} delay={i * 90} className="relative pl-10 md:pl-0">
-                <span className="absolute left-0 top-1 h-[26px] w-[26px] rounded-full border border-gold bg-cream md:relative md:block" />
-                <span className="mt-0 block font-display text-xs tracking-[0.3em] text-gold md:mt-6">
-                  {s.n}
-                </span>
-                <h3 className="display-xl mt-3 text-lg text-navy">{s.title}</h3>
-                <p className="mt-2 text-sm font-medium text-navy/80">{s.lead}</p>
-                <p className="mt-2 text-sm leading-relaxed text-navy/55">{s.body}</p>
-              </Reveal>
-            ))}
-          </ol>
         </div>
       </section>
 
@@ -414,26 +384,57 @@ function FortyPage() {
 
       {/* ABOUT */}
       <section id="about" className="section-light px-5 py-24 sm:px-8 sm:py-32">
-        <div className="mx-auto grid max-w-7xl gap-14 lg:grid-cols-[1.1fr_0.9fr]">
-          <Reveal>
-            <p className="eyebrow">About FORTY</p>
-            <h2 className="display-xl mt-6 text-2xl leading-tight text-navy sm:text-4xl">
-              Most brands don't have an attention problem. They have a signal problem.
-            </h2>
-          </Reveal>
-          <Reveal delay={120}>
-            <p className="text-base leading-relaxed text-navy/70">
-              They're saying too much. Looking like everyone else. Creating without a clear reason.
-              FORTY exists to change that. We help businesses find what makes them different — and turn
-              that difference into something people can see, feel and remember.
+        <div className="mx-auto grid max-w-7xl gap-14 lg:grid-cols-[1fr_1fr] lg:gap-20">
+          <div>
+            <Reveal>
+              <p className="eyebrow">How We Work</p>
+              <h2 className="display-xl mt-6 text-2xl leading-tight text-navy sm:text-4xl">
+                Clear thinking. Bold creative. Work that reaches people.
+              </h2>
+              <p className="mt-6 max-w-xl text-base leading-relaxed text-navy/70">
+                We start by understanding the problem, define the strongest direction, build the work,
+                and get it in front of the people who matter.
+              </p>
+              <blockquote className="mt-10 border-l border-gold pl-6 font-display text-lg uppercase leading-snug tracking-[0.04em] text-navy sm:text-2xl">
+                Good marketing gets attention. Great brands earn attention.
+              </blockquote>
+            </Reveal>
+          </div>
+          <Reveal delay={120} className="h-fit border border-navy/15 bg-navy p-7 text-cream sm:p-10" id="contact">
+            <p className="eyebrow">Free Consultation</p>
+            <h2 className="display-xl mt-5 text-2xl sm:text-3xl">Schedule your free consultation.</h2>
+            <p className="mt-4 text-sm leading-relaxed text-cream/65">
+              Tell us a little about your project and we'll be in touch to arrange a time.
             </p>
-            <blockquote className="mt-10 border-l border-gold pl-6 font-display text-lg uppercase leading-snug tracking-[0.04em] text-navy sm:text-2xl">
-              Good marketing gets attention. Great brands earn attention.
-            </blockquote>
-            <p className="mt-10 text-xs uppercase tracking-[0.24em] text-navy/45">
-              Founded in Kenya. Built for wherever the brand wants to go.
-            </p>
+            <div className="mt-8">
+              <ContactForm />
+            </div>
           </Reveal>
+        </div>
+
+        <div id="method" className="mx-auto mt-20 max-w-7xl">
+          <Reveal delay={80}>
+            <h3 className="display-xl text-2xl text-navy sm:text-3xl">The FORTY method</h3>
+          </Reveal>
+          <ol className="mt-8 flex gap-5 overflow-x-auto pb-4">
+            {METHOD.map((s, i) => (
+              <Reveal
+                as="li"
+                key={s.n}
+                delay={120 + i * 80}
+                className="grid min-w-48 grid-cols-[2.5rem_1fr] gap-3"
+              >
+                <span className="grid h-8 w-8 place-items-center rounded-full border border-gold font-display text-[0.65rem] tracking-[0.12em] text-gold">
+                  {s.n}
+                </span>
+                <div>
+                  <h3 className="display-xl text-lg text-navy">{s.title}</h3>
+                  <p className="mt-1 text-sm font-medium text-navy/80">{s.lead}</p>
+                  <p className="mt-1 text-sm leading-relaxed text-navy/55">{s.body}</p>
+                </div>
+              </Reveal>
+            ))}
+          </ol>
         </div>
 
         {/* LOGO MARQUEE — under About */}
@@ -456,34 +457,7 @@ function FortyPage() {
             </div>
           </div>
         </Reveal>
-      </section>
 
-      {/* BOOK WITH US */}
-      <section id="contact" className="px-5 py-24 sm:px-8 sm:py-32">
-        <div className="mx-auto max-w-5xl">
-          <Reveal>
-            <div className="grid gap-10 border border-border bg-navy-soft p-7 sm:p-12 lg:grid-cols-2 lg:gap-16">
-              <div>
-                <p className="eyebrow">Book with us</p>
-                <h2 className="display-xl mt-6 text-2xl sm:text-4xl">Got something worth building?</h2>
-                <p className="mt-6 text-sm leading-relaxed text-cream/65">
-                  Tell us what you're working on. Whether you're launching something new, rebuilding
-                  something old, or simply know your brand could be doing more — we'd like to hear
-                  about it.
-                </p>
-                <a
-                  href={BOOKING_URL}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="mt-8 inline-block border-b border-gold pb-1 text-[0.7rem] uppercase tracking-[0.24em] text-gold"
-                >
-                  Schedule a Consultation
-                </a>
-              </div>
-              <ContactForm />
-            </div>
-          </Reveal>
-        </div>
       </section>
 
       {/* FOOTER */}
@@ -560,18 +534,84 @@ function FooterCol({
   );
 }
 
+function WorkCarousel() {
+  const [emblaRef, emblaApi] = useEmblaCarousel({ align: "start", loop: true });
+  const [selectedIndex, setSelectedIndex] = useState(0);
+
+  useEffect(() => {
+    if (!emblaApi) return;
+
+    const updateSelectedIndex = () => setSelectedIndex(emblaApi.selectedScrollSnap());
+    updateSelectedIndex();
+    emblaApi.on("select", updateSelectedIndex);
+
+    return () => emblaApi.off("select", updateSelectedIndex);
+  }, [emblaApi]);
+
+  return (
+    <div>
+      <div ref={emblaRef} className="overflow-hidden">
+        <div className="flex touch-pan-y">
+          {CASES.map((study) => (
+            <div key={study.n} className="min-w-0 flex-[0_0_100%]">
+              <CaseCard study={study} />
+            </div>
+          ))}
+        </div>
+      </div>
+      <div className="mt-6 flex items-center justify-between border-t border-border pt-5">
+        <div className="flex gap-2" aria-label="Choose a project">
+          {CASES.map((study, index) => (
+            <button
+              key={study.n}
+              type="button"
+              onClick={() => emblaApi?.scrollTo(index)}
+              aria-label={`View ${study.client}`}
+              aria-current={selectedIndex === index ? "true" : undefined}
+              className={`grid h-9 w-9 place-items-center border font-display text-[0.65rem] tracking-[0.15em] transition-colors ${
+                selectedIndex === index ? "border-gold bg-gold text-navy" : "border-border text-cream/60 hover:border-gold hover:text-gold"
+              }`}
+            >
+              {study.n}
+            </button>
+          ))}
+        </div>
+        <div className="flex gap-2">
+          <button
+            type="button"
+            onClick={() => emblaApi?.scrollPrev()}
+            aria-label="Previous project"
+            title="Previous project"
+            className="grid h-9 w-9 place-items-center border border-border text-cream transition-colors hover:border-gold hover:text-gold"
+          >
+            <ArrowLeft className="h-4 w-4" />
+          </button>
+          <button
+            type="button"
+            onClick={() => emblaApi?.scrollNext()}
+            aria-label="Next project"
+            title="Next project"
+            className="grid h-9 w-9 place-items-center border border-border text-cream transition-colors hover:border-gold hover:text-gold"
+          >
+            <ArrowRight className="h-4 w-4" />
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 function CaseCard({ study }: { study: CaseStudy }) {
   const [open, setOpen] = useState(false);
   const expandable = !study.soon;
 
   return (
-    <article className="border border-border bg-navy-soft/40">
+    <article className="overflow-hidden border border-border bg-navy-soft/40 shadow-lg">
       <button
         type="button"
-        onClick={() => expandable && setOpen((v) => !v)}
+        onClick={() => expandable && setOpen((value) => !value)}
         aria-expanded={expandable ? open : undefined}
-        disabled={!expandable}
-        className="grid w-full grid-cols-1 items-stretch text-left md:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)]"
+        className="grid min-h-[24rem] w-full grid-cols-1 items-stretch text-left md:min-h-[26rem] md:grid-cols-[minmax(0,1.25fr)_minmax(11rem,0.75fr)]"
       >
         {study.image ? (
           <img
@@ -580,19 +620,19 @@ function CaseCard({ study }: { study: CaseStudy }) {
             loading="lazy"
             width={1280}
             height={960}
-            className="h-56 w-full object-cover md:h-full"
+            className="h-52 w-full object-cover transition-transform duration-700 hover:scale-[1.03] md:h-full"
           />
         ) : (
-          <div className="grid h-56 place-items-center bg-navy md:h-full">
+          <div className="grid h-52 place-items-center bg-navy md:h-full">
             <span className="text-[0.6rem] uppercase tracking-[0.3em] text-cream/25">
               Coming Soon
             </span>
           </div>
         )}
-        <div className="flex flex-col justify-center gap-4 p-7 sm:p-10">
+        <div className="flex flex-col justify-center gap-3 border-t border-border p-6 sm:p-8 md:border-l md:border-t-0">
           <span className="font-display text-xs tracking-[0.3em] text-gold">{study.n}</span>
-          <h3 className="display-xl text-xl sm:text-3xl">{study.client}</h3>
-          <p className="text-sm leading-relaxed text-cream/60 sm:text-base">{study.hook}</p>
+          <h3 className="display-xl text-xl sm:text-2xl">{study.client}</h3>
+          <p className="text-sm leading-relaxed text-cream/60">{study.hook}</p>
           <span className="mt-2 text-[0.65rem] uppercase tracking-[0.24em] text-gold">
             {expandable ? (open ? "Close case study —" : "Read the case study +") : "Coming Soon"}
           </span>
@@ -633,7 +673,7 @@ function ContactForm() {
         type="submit"
         className="w-full bg-gold px-6 py-4 text-[0.7rem] uppercase tracking-[0.24em] text-navy transition-opacity hover:opacity-90"
       >
-        Tell Us About Your Project
+        Schedule My Free Consultation
       </button>
       {sent && (
         <p className="text-xs uppercase tracking-[0.2em] text-gold">
