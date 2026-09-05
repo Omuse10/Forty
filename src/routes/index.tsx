@@ -169,6 +169,8 @@ function Logo({ className = "h-7" }: { className?: string }) {
 function FortyPage() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [activePillar, setActivePillar] = useState(0);
+  const [activeService, setActiveService] = useState(0);
+  const [expandedService, setExpandedService] = useState<number | null>(null);
 
   useEffect(() => {
     const interval = window.setInterval(() => {
@@ -186,7 +188,7 @@ function FortyPage() {
           <a href="#top" className="flex min-w-0 items-center">
             <Logo className="h-6 sm:h-7" />
           </a>
-          <ul className="hidden justify-center gap-9 lg:flex">
+          <ul className="hidden justify-self-end gap-9 lg:flex">
             {NAV.map((item) => (
               <li key={item.label}>
                 <a
@@ -249,13 +251,13 @@ function FortyPage() {
       </header>
 
       {/* HERO */}
-      <section id="top" className="grain relative z-0 flex min-h-[92vh] items-center overflow-hidden">
+      <section id="top" className="grain relative z-0 flex min-h-0 items-start overflow-hidden sm:min-h-[82vh] sm:items-center lg:min-h-[44rem]">
         <div
           aria-hidden
           className="pointer-events-none absolute -right-40 top-1/4 h-[38rem] w-[38rem] rounded-full opacity-[0.07]"
           style={{ background: "radial-gradient(circle, var(--gold) 0%, transparent 65%)" }}
         />
-        <div className="mx-auto w-full max-w-7xl px-5 pb-12 pt-24 sm:px-8 sm:pb-16 lg:pb-20">
+        <div className="mx-auto w-full max-w-7xl px-5 pb-6 pt-16 sm:px-8 sm:pb-12 sm:pt-20 lg:pb-16">
           <Reveal>
             <p className="eyebrow flex flex-wrap items-center gap-x-2 gap-y-1" aria-label="Strategy, Creative, Distribution">
               {PILLARS.map((pillar, index) => (
@@ -271,18 +273,18 @@ function FortyPage() {
             </p>
           </Reveal>
           <Reveal delay={90}>
-            <h1 className="display-xl mt-8 max-w-5xl text-[2.6rem] sm:text-6xl lg:text-[5.2rem]">
+            <h1 className="display-xl mt-6 max-w-5xl text-[2.6rem] sm:mt-8 sm:text-6xl lg:text-[5.2rem]">
               We build brands people <span className="text-gold">notice</span>, remember, and choose.
             </h1>
           </Reveal>
           <Reveal delay={180}>
-            <p className="mt-9 max-w-xl text-base leading-relaxed text-cream/65 sm:text-lg">
+            <p className="mt-6 max-w-xl text-base leading-relaxed text-cream/65 sm:mt-9 sm:text-lg">
               FORTY is a creative marketing agency helping ambitious businesses turn their ideas into
               brands, content and campaigns that move people.
             </p>
           </Reveal>
           <Reveal delay={260}>
-            <div className="mt-16 flex flex-col gap-4 pb-8 sm:flex-row sm:pb-10">
+            <div className="mt-8 flex flex-col gap-4 pb-2 sm:mt-12 sm:flex-row sm:pb-6">
               <a
                 href="#work"
                 className="bg-gold px-8 py-4 text-center text-[0.7rem] uppercase tracking-[0.24em] text-navy transition-opacity hover:opacity-90"
@@ -303,20 +305,25 @@ function FortyPage() {
       </section>
 
       {/* SERVICES — cards straddle hero / light section boundary */}
-      <section id="services" className="section-light relative overflow-visible px-5 pb-24 pt-12 sm:px-8 sm:pb-32 sm:pt-20">
+      <section id="services" className="section-light relative overflow-visible px-5 pb-12 pt-6 sm:px-8 sm:pb-24 sm:pt-12">
         <div aria-hidden className="absolute inset-x-0 top-0 h-[27%] bg-navy sm:h-[30%]" />
         {/* Floating breakout card composition */}
-        <div className="relative z-10 w-full overflow-visible">
-          <div className="relative mx-auto grid w-full max-w-[95rem] grid-cols-3 items-stretch gap-3 overflow-x-auto px-5 py-6 sm:gap-5 lg:max-w-[90rem] lg:gap-10 lg:overflow-visible lg:px-8">
-            {PILLARS.map((p, i) => {
+        <div className="relative z-10 w-full overflow-visible px-5 lg:px-8">
+          <div className="relative mx-auto w-full max-w-[95rem] overflow-hidden py-6 sm:overflow-visible lg:max-w-[90rem]">
+            <div
+              className={`flex items-stretch gap-0 transition-transform duration-500 ease-out sm:grid sm:grid-cols-3 sm:gap-5 sm:translate-x-0 lg:gap-10 ${
+                activeService === 0 ? "translate-x-0" : activeService === 1 ? "-translate-x-full" : "-translate-x-[200%]"
+              }`}
+            >
+              {PILLARS.map((p, i) => {
               const layer = i === 1 ? "z-20" : "z-10";
               return (
                 <Reveal
                   key={p.title}
                   delay={i * 100}
-                  className={`relative ${layer} min-w-[15rem] self-stretch`}
+                  className={`relative ${layer} w-full shrink-0 self-stretch sm:min-w-[15rem] sm:w-auto sm:shrink`}
                 >
-                  <article className="group flex min-h-full flex-col rounded-xl border border-navy/10 bg-cream p-4 pb-8 shadow-[0_1px_2px_rgba(11,21,38,0.06),0_8px_24px_-12px_rgba(11,21,38,0.12)] transition-all duration-300 hover:-translate-y-1.5 hover:border-gold/40 hover:shadow-[0_2px_4px_rgba(11,21,38,0.06),0_20px_40px_-16px_rgba(11,21,38,0.22)] sm:p-8 sm:pb-12 lg:p-10 lg:pb-14">
+                  <article className="group relative flex min-h-full flex-col rounded-xl border border-navy/10 bg-cream p-4 pb-20 shadow-[0_1px_2px_rgba(11,21,38,0.06),0_8px_24px_-12px_rgba(11,21,38,0.12)] transition-all duration-300 hover:-translate-y-1.5 hover:border-gold/40 hover:shadow-[0_2px_4px_rgba(11,21,38,0.06),0_20px_40px_-16px_rgba(11,21,38,0.22)] sm:p-8 sm:pb-12 lg:p-10 lg:pb-14">
                     <div className="flex items-start justify-between">
                       <span className="grid h-10 w-10 place-items-center rounded-lg border border-gold/30 bg-gold/10 text-gold transition-colors duration-300 group-hover:bg-gold group-hover:text-navy sm:h-14 sm:w-14">
                         <p.icon className="h-4 w-4 sm:h-6 sm:w-6" strokeWidth={1.5} />
@@ -326,8 +333,10 @@ function FortyPage() {
                       </span>
                     </div>
                     <h3 className="display-xl mt-3 text-sm text-navy sm:mt-8 sm:text-2xl">{p.title}</h3>
-                    <p className="mt-1 hidden text-xs leading-relaxed text-navy/65 sm:mt-4 sm:block sm:text-sm">{p.body}</p>
-                    <ul className="mt-3 hidden space-y-2 border-t border-navy/10 pt-3 sm:mt-8 sm:block sm:space-y-3 sm:pt-6">
+                    <p className={`mt-4 text-xs leading-relaxed text-navy/65 sm:text-sm ${expandedService === i ? "block" : "hidden sm:block"}`}>
+                      {p.body}
+                    </p>
+                    <ul className={`mt-5 space-y-2 border-t border-navy/10 pt-4 sm:mt-8 sm:space-y-3 sm:pt-6 ${expandedService === i ? "block" : "hidden sm:block"}`}>
                       {p.items.map((item) => (
                         <li key={item} className="flex items-start gap-2 text-xs text-navy/75 sm:gap-3 sm:text-sm">
                           <span className="mt-1.5 h-px w-3 shrink-0 bg-gold sm:mt-2 sm:w-4" />
@@ -335,23 +344,75 @@ function FortyPage() {
                         </li>
                       ))}
                     </ul>
-                    <a
-                      href={BOOKING_URL}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="mt-auto inline-flex items-center gap-1 pt-4 text-[0.55rem] uppercase tracking-[0.16em] text-gold transition-all duration-300 group-hover:gap-2 sm:pt-8 sm:text-[0.7rem] sm:tracking-[0.22em]"
-                    >
-                      {p.cta} <span aria-hidden>→</span>
-                    </a>
+                    <div className="absolute inset-x-4 bottom-4 flex items-center justify-between sm:static sm:mt-auto sm:block sm:pt-8">
+                      <a
+                        href={BOOKING_URL}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="hidden items-center gap-1 text-[0.55rem] uppercase tracking-[0.16em] text-gold transition-all duration-300 group-hover:gap-2 sm:inline-flex sm:text-[0.7rem] sm:tracking-[0.22em]"
+                      >
+                        {p.cta} <span aria-hidden>→</span>
+                      </a>
+                      <div className="flex w-full items-end justify-between gap-3 sm:hidden">
+                        <div className="flex flex-col items-start gap-1">
+                          <button
+                            type="button"
+                            onClick={() => setExpandedService((current) => (current === i ? null : i))}
+                            className="rounded-[4px] border border-gold px-1.5 py-1 text-[0.6rem] uppercase tracking-[0.18em] text-gold transition-colors hover:bg-gold hover:text-navy"
+                          >
+                            {expandedService === i ? "View less" : "View more"}
+                          </button>
+                          <a
+                            href={BOOKING_URL}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-flex rounded-[4px] border border-gold px-1.5 py-1 text-[0.55rem] uppercase tracking-[0.16em] text-gold transition-colors hover:bg-gold hover:text-navy"
+                          >
+                            {p.cta} <span aria-hidden>→</span>
+                          </a>
+                        </div>
+                        <div className="flex gap-2">
+                        {i > 0 && (
+                          <button
+                            type="button"
+                            onClick={() => {
+                              setActiveService(i - 1);
+                              setExpandedService(null);
+                            }}
+                            aria-label={`View ${PILLARS[i - 1].title}`}
+                            title={`View ${PILLARS[i - 1].title}`}
+                            className="grid h-9 w-9 place-items-center border border-gold text-gold transition-colors hover:bg-gold hover:text-navy"
+                          >
+                            <ArrowLeft className="h-4 w-4" />
+                          </button>
+                        )}
+                        {i < PILLARS.length - 1 && (
+                          <button
+                            type="button"
+                            onClick={() => {
+                              setActiveService(i + 1);
+                              setExpandedService(null);
+                            }}
+                            aria-label={`View ${PILLARS[i + 1].title}`}
+                            title={`View ${PILLARS[i + 1].title}`}
+                            className="grid h-9 w-9 place-items-center border border-gold text-gold transition-colors hover:bg-gold hover:text-navy"
+                          >
+                            <ArrowRight className="h-4 w-4" />
+                          </button>
+                        )}
+                        </div>
+                      </div>
+                    </div>
                   </article>
                 </Reveal>
               );
-            })}
+              })}
+            </div>
           </div>
         </div>
 
 
-        <div className="mx-auto mt-16 max-w-7xl">
+        <div className="mx-auto mt-8 max-w-7xl sm:mt-10">
           <Reveal delay={120}>
             <p className="mx-auto max-w-3xl text-center text-base leading-relaxed text-navy/70 sm:text-lg">
               Strategy → Creative → Distribution. That's how we build brands that don't just look good
@@ -362,21 +423,21 @@ function FortyPage() {
       </section>
 
       {/* SELECTED WORK */}
-      <section id="work" className="section-light px-5 pb-24 pt-12 sm:px-8 sm:pb-36 sm:pt-16">
+      <section id="work" className="section-light px-5 pb-12 pt-6 sm:px-8 sm:pb-24 sm:pt-12">
         <div className="mx-auto max-w-7xl">
           <Reveal>
             <p className="eyebrow">Proof, Not Promises</p>
             <h2 className="display-xl mt-6 text-3xl sm:text-5xl">Selected work</h2>
           </Reveal>
-          <Reveal delay={80} className="mt-12">
+          <Reveal delay={80} className="mt-6 sm:mt-8">
             <WorkCarousel />
           </Reveal>
         </div>
       </section>
 
       {/* ABOUT */}
-      <section id="about" className="section-light px-5 py-24 sm:px-8 sm:py-32">
-        <div className="mx-auto grid max-w-7xl gap-14 lg:grid-cols-[1fr_1fr] lg:gap-20">
+      <section id="about" className="section-light px-5 py-12 sm:px-8 sm:py-24">
+        <div className="mx-auto grid max-w-7xl gap-8 sm:gap-10 lg:grid-cols-[1fr_1fr] lg:gap-14">
           <div>
             <Reveal>
               <p className="eyebrow">How We Work</p>
@@ -404,7 +465,7 @@ function FortyPage() {
           </Reveal>
         </div>
 
-        <div id="method" className="mx-auto mt-20 max-w-7xl">
+        <div id="method" className="mx-auto mt-10 max-w-7xl sm:mt-14">
           <Reveal delay={80}>
             <h3 className="display-xl text-2xl text-navy sm:text-3xl">The FORTY method</h3>
           </Reveal>
@@ -437,7 +498,7 @@ function FortyPage() {
 
         {/* LOGO MARQUEE — under About */}
         <Reveal delay={140}>
-          <div className="mx-auto mt-20 max-w-7xl overflow-hidden border-t border-navy/10 pt-10">
+          <div className="mx-auto mt-10 max-w-7xl overflow-hidden border-t border-navy/10 pt-6 sm:mt-14 sm:pt-8">
             <p className="mb-6 text-center text-[0.6rem] uppercase tracking-[0.3em] text-navy/45">
               Brands we've worked with
             </p>
@@ -459,7 +520,7 @@ function FortyPage() {
         </Reveal>
 
         <Reveal delay={180}>
-          <article className="mx-auto mt-16 grid max-w-5xl gap-8 rounded-[8px] border border-navy/15 bg-navy p-7 text-cream sm:p-10 md:grid-cols-[auto_1fr] md:items-center md:gap-10">
+          <article className="mx-auto mt-8 grid max-w-5xl gap-8 rounded-[8px] border border-navy/15 bg-navy p-7 text-cream sm:mt-12 sm:p-10 md:grid-cols-[auto_1fr] md:items-center md:gap-10">
             <div className="grid h-28 w-28 place-items-center rounded-full border border-gold/50 bg-navy-soft font-display text-2xl tracking-[0.16em] text-gold sm:h-36 sm:w-36 sm:text-3xl">
               FL
             </div>
@@ -484,13 +545,13 @@ function FortyPage() {
       </section>
 
       {/* THE RESET */}
-      <section id="reset" className="grain relative overflow-hidden px-5 py-24 sm:px-8 sm:py-36">
+      <section id="reset" className="grain relative overflow-hidden px-5 py-12 sm:px-8 sm:py-24">
         <div
           aria-hidden
           className="pointer-events-none absolute left-1/2 top-1/2 h-[30rem] w-[30rem] -translate-x-1/2 -translate-y-1/2 rounded-full opacity-[0.08]"
           style={{ background: "radial-gradient(circle, var(--gold) 0%, transparent 70%)" }}
         />
-        <div className="relative mx-auto max-w-3xl border border-gold/30 px-6 py-16 text-center sm:px-14">
+        <div className="relative mx-auto max-w-3xl border border-gold/30 px-6 py-12 text-center sm:px-14 sm:py-14">
           <Reveal>
             <p className="eyebrow">The Reset</p>
             <h2 className="display-xl mt-6 text-3xl sm:text-5xl">Your brand needs a reset.</h2>
