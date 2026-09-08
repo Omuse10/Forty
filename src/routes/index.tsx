@@ -836,7 +836,7 @@ function CaseCard({ study }: { study: CaseStudy }) {
             </span>
           </div>
         )}
-        <div className="flex flex-col justify-center gap-3 border-t border-border p-6 sm:p-8 md:border-l md:border-t-0">
+        <div className="flex flex-col justify-center gap-3 border-t border-cream/15 bg-navy/65 p-6 backdrop-blur-md sm:p-8 md:border-l md:border-t-0">
           <span className="font-display text-xs tracking-[0.3em] text-gold">{study.n}</span>
           <h3 className="display-xl text-xl text-cream sm:text-2xl">{study.client}</h3>
           <p className="text-sm leading-relaxed text-cream/60">{study.hook}</p>
