@@ -363,18 +363,33 @@ function FortyPage() {
             >
               {PILLARS.map((p, i) => {
                 const layer = i === 1 ? "z-20" : "z-10";
+                const accent =
+                  i === 0
+                    ? "from-gold/25 via-cream/70 to-cream/85"
+                    : i === 1
+                      ? "from-navy/10 via-cream/70 to-gold-soft/30"
+                      : "from-gold-soft/35 via-cream/70 to-cream/85";
                 return (
                   <Reveal
                     key={p.title}
                     delay={i * 100}
                     className={`relative ${layer} w-full shrink-0 self-stretch sm:min-w-[15rem] sm:w-auto sm:shrink`}
                   >
-                    <article className="group relative flex min-h-full flex-col rounded-xl border border-navy/10 bg-cream p-4 pb-20 shadow-[0_1px_2px_rgba(11,21,38,0.06),0_8px_24px_-12px_rgba(11,21,38,0.12)] transition-all duration-300 hover:-translate-y-1.5 hover:border-gold/40 hover:shadow-[0_2px_4px_rgba(11,21,38,0.06),0_20px_40px_-16px_rgba(11,21,38,0.22)] sm:p-8 sm:pb-12 lg:p-10 lg:pb-14">
+                    <article
+                      className={`group relative flex min-h-full flex-col overflow-hidden rounded-xl border border-navy/15 bg-gradient-to-br ${accent} p-4 pb-20 shadow-[0_1px_2px_rgba(11,21,38,0.06),0_8px_24px_-12px_rgba(11,21,38,0.12)] backdrop-blur-sm transition-all duration-300 hover:-translate-y-1.5 hover:border-gold/40 hover:shadow-[0_2px_4px_rgba(11,21,38,0.06),0_20px_40px_-16px_rgba(11,21,38,0.22)] sm:p-8 sm:pb-12 lg:p-10 lg:pb-14`}
+                    >
+                      <span
+                        aria-hidden
+                        className="pointer-events-none absolute -right-7 -top-10 font-display text-[10rem] leading-none text-navy/[0.045]"
+                      >
+                        {p.n}
+                      </span>
+                      <span className="absolute inset-x-0 top-0 h-1 bg-gold" aria-hidden />
                       <div className="flex items-start justify-between">
-                        <span className="grid h-10 w-10 place-items-center rounded-lg border border-gold/30 bg-gold/10 text-gold transition-colors duration-300 group-hover:bg-gold group-hover:text-navy sm:h-14 sm:w-14">
-                          <p.icon className="h-4 w-4 sm:h-6 sm:w-6" strokeWidth={1.5} />
+                        <span className="grid h-10 w-10 place-items-center rounded-lg border border-gold/60 bg-gold/25 text-gold transition-colors duration-300 group-hover:bg-gold group-hover:text-navy sm:h-14 sm:w-14">
+                          <p.icon className="h-4 w-4 sm:h-6 sm:w-6" strokeWidth={2} />
                         </span>
-                        <span className="font-display text-[0.55rem] tracking-[0.2em] text-navy/30 sm:text-xs sm:tracking-[0.3em]">
+                        <span className="font-display text-[0.55rem] tracking-[0.2em] text-navy/40 sm:text-xs sm:tracking-[0.3em]">
                           {p.n}
                         </span>
                       </div>
@@ -382,17 +397,17 @@ function FortyPage() {
                         {p.title}
                       </h3>
                       <p
-                        className={`mt-4 text-xs leading-relaxed text-navy/65 sm:text-sm ${expandedService === i ? "block" : "hidden sm:block"}`}
+                        className={`mt-4 text-xs leading-relaxed text-navy/80 sm:text-sm ${expandedService === i ? "block" : "hidden sm:block"}`}
                       >
                         {p.body}
                       </p>
                       <ul
-                        className={`mt-5 space-y-2 border-t border-navy/10 pt-4 sm:mt-8 sm:space-y-3 sm:pt-6 ${expandedService === i ? "block" : "hidden sm:block"}`}
+                        className={`mt-5 space-y-2 border-t border-navy/20 pt-4 sm:mt-8 sm:space-y-3 sm:pt-6 ${expandedService === i ? "block" : "hidden sm:block"}`}
                       >
                         {p.items.map((item) => (
                           <li
                             key={item}
-                            className="flex items-start gap-2 text-xs text-navy/75 sm:gap-3 sm:text-sm"
+                            className="flex items-start gap-2 text-xs text-navy/90 sm:gap-3 sm:text-sm"
                           >
                             <span className="mt-1.5 h-px w-3 shrink-0 bg-gold sm:mt-2 sm:w-4" />
                             {item}
