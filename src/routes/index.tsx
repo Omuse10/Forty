@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useEffect, useState, type FormEvent } from "react";
+import emailjs from "@emailjs/browser";
+import { useEffect, useRef, useState, type FormEvent } from "react";
 import useEmblaCarousel from "embla-carousel-react";
 import {
   ArrowLeft,
@@ -332,9 +333,7 @@ function FortyPage() {
                 Explore Our Work
               </a>
               <a
-                href={BOOKING_URL}
-                target="_blank"
-                rel="noopener noreferrer"
+                href="#contact"
                 className="border border-cream/35 px-8 py-4 text-center text-[0.7rem] uppercase tracking-[0.24em] text-cream transition-colors hover:border-gold hover:text-gold"
               >
                 Book a Consultation
@@ -437,8 +436,8 @@ function FortyPage() {
                                   setActiveService(i - 1);
                                   setExpandedService(null);
                                 }}
-                                aria-label={`View ${PILLARS[i - 1].title}`}
-                                title={`View ${PILLARS[i - 1].title}`}
+                                aria-label={`View ${PILLARS[i - 1]?.title ?? "previous service"}`}
+                                title={`View ${PILLARS[i - 1]?.title ?? "previous service"}`}
                                 className="grid h-9 w-9 place-items-center border border-gold text-gold transition-colors hover:bg-gold hover:text-navy"
                               >
                                 <ArrowLeft className="h-4 w-4" />
@@ -451,8 +450,8 @@ function FortyPage() {
                                   setActiveService(i + 1);
                                   setExpandedService(null);
                                 }}
-                                aria-label={`View ${PILLARS[i + 1].title}`}
-                                title={`View ${PILLARS[i + 1].title}`}
+                                aria-label={`View ${PILLARS[i + 1]?.title ?? "next service"}`}
+                                title={`View ${PILLARS[i + 1]?.title ?? "next service"}`}
                                 className="grid h-9 w-9 place-items-center border border-gold text-gold transition-colors hover:bg-gold hover:text-navy"
                               >
                                 <ArrowRight className="h-4 w-4" />
@@ -607,10 +606,10 @@ function FortyPage() {
                 Founder &amp; CEO
               </p>
               <a
-                href="mailto:ceo@forty.example"
+                href="mailto:hashimkivinga6@gmail.com"
                 className="mt-3 inline-block text-sm text-cream/70 transition-colors hover:text-gold"
               >
-                ceo@forty.example
+                hashimkivinga6@gmail.com
               </a>
               <p className="mt-5 max-w-2xl text-sm leading-relaxed text-cream/65 sm:text-base">
                 A strategy-first creative leader helping ambitious businesses find their signal,
@@ -636,7 +635,7 @@ function FortyPage() {
               Don't know what's wrong with your marketing? We do.
             </p>
             <p className="mx-auto mt-6 max-w-xl text-sm leading-relaxed text-cream/65 sm:text-base">
-              45–60 minutes. We'll identify what's working, what's broken, and what's missing — and
+              45–60 minutes. We'll identify what's working, what's broken, and what's missing and
               leave you with 3 priority moves for your brand.
             </p>
             <a
@@ -674,7 +673,7 @@ function FortyPage() {
             <FooterCol
               title="Work With Us"
               links={[
-                { label: "Book a Consultation", href: BOOKING_URL, external: true },
+                { label: "Book a Consultation", href: "#contact" },
                 { label: "Contact", href: "#contact" },
                 { label: "The Reset", href: "#reset" },
               ]}
@@ -736,7 +735,7 @@ function WorkCarousel() {
     updateSelectedIndex();
     emblaApi.on("select", updateSelectedIndex);
 
-    return () => emblaApi.off("select", updateSelectedIndex);
+    return () => void emblaApi.off("select", updateSelectedIndex);
   }, [emblaApi]);
 
   return (
@@ -846,31 +845,56 @@ function CaseCard({ study }: { study: CaseStudy }) {
 }
 
 function ContactForm() {
+  const form = useRef<HTMLFormElement>(null);
   const [sent, setSent] = useState(false);
+  const [sending, setSending] = useState(false);
+  const [error, setError] = useState(false);
 
-  function onSubmit(e: FormEvent<HTMLFormElement>) {
+  async function onSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    setSent(true);
+    if (!form.current) return;
+
+    setSending(true);
+    setSent(false);
+    setError(false);
+
+    try {
+      await emailjs.sendForm("service_5qhb6fe", "template_s12h12v", form.current, {
+        publicKey: "bO3lNpAsCz4S9IP0b",
+      });
+      setSent(true);
+      form.current.reset();
+    } catch {
+      setError(true);
+    } finally {
+      setSending(false);
+    }
   }
 
   const field =
     "w-full border border-border bg-navy px-4 py-3 text-sm text-cream placeholder:text-cream/35 focus:border-gold focus:outline-none";
 
   return (
-    <form onSubmit={onSubmit} className="space-y-4">
-      <input required name="name" placeholder="Name" className={field} />
-      <input required type="email" name="email" placeholder="Email" className={field} />
-      <input name="phone" placeholder="Phone" className={field} />
+    <form ref={form} onSubmit={onSubmit} className="space-y-4">
+      <input required name="user_name" placeholder="Name" className={field} />
+      <input required type="email" name="user_email" placeholder="Email" className={field} />
+      <input name="user_phone" placeholder="Phone" className={field} />
       <textarea required name="message" rows={4} placeholder="Message" className={field} />
       <button
         type="submit"
+        disabled={sending}
         className="w-full bg-gold px-6 py-4 text-[0.7rem] uppercase tracking-[0.24em] text-navy transition-opacity hover:opacity-90"
       >
-        Schedule My Free Consultation
+        {sending ? "Sending..." : "Schedule My Free Consultation"}
       </button>
       {sent && (
         <p className="text-xs uppercase tracking-[0.2em] text-gold">
-          Thank you — we'll be in touch.
+          Thank you! We'll be in touch.
+        </p>
+      )}
+      {error && (
+        <p className="text-xs uppercase tracking-[0.2em] text-red-300">
+          Something went wrong. Please try again.
         </p>
       )}
     </form>
