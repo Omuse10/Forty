@@ -5,11 +5,13 @@ export function Reveal({
   className = "",
   delay = 0,
   as: Tag = "div",
+  id,
 }: {
   children: ReactNode;
   className?: string;
   delay?: number;
   as?: "div" | "li" | "section" | "article";
+  id?: string;
 }) {
   const ref = useRef<HTMLElement | null>(null);
   const [visible, setVisible] = useState(false);
@@ -37,6 +39,7 @@ export function Reveal({
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       ref={ref as any}
       data-visible={visible}
+      id={id}
       style={delay ? { transitionDelay: `${delay}ms` } : undefined}
       className={`reveal ${className}`}
     >

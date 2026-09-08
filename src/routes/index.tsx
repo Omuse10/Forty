@@ -16,10 +16,11 @@ import {
 } from "lucide-react";
 import { Reveal } from "@/components/Reveal";
 import logo from "@/assets/forty-logo.png";
+import iCodeLogo from "@/assets/i-code_logo_v2.png";
 import workIcode from "@/assets/work-icode.jpg";
 
 // TODO: REPLACE_BOOKING_URL — swap this placeholder for the real Google Form link.
-const BOOKING_URL = "https://forms.gle/PLACEHOLDER";
+const BOOKING_URL = "https://forms.gle/nYiFRrCgktCEmcLfA";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -50,7 +51,7 @@ const NAV = [
 ];
 
 const CLIENTS = [
-  { name: "iCode", mark: "iC" },
+  { name: "iCode", mark: "iC", logo: iCodeLogo },
   { name: "Client 02", mark: "02" },
   { name: "Client 03", mark: "03" },
   { name: "Client 04", mark: "04" },
@@ -88,13 +89,7 @@ const PILLARS: Pillar[] = [
     body: "We turn strategy into things people actually see.",
     cta: "Explore Creative",
     icon: PenTool,
-    items: [
-      "Brand identity",
-      "Creative direction",
-      "Photography",
-      "Videography",
-      "Graphic design",
-    ],
+    items: ["Brand identity", "Creative direction", "Photography", "Videography", "Graphic design"],
   },
   {
     n: "03",
@@ -150,16 +145,53 @@ const CASES: CaseStudy[] = [
       },
     ],
   },
-  { n: "02", client: "Client TBD", hook: "Building a brand from zero.", image: workIcode, soon: true },
-  { n: "03", client: "Client TBD", hook: "Repositioning an existing brand.", image: workIcode, soon: true },
+  {
+    n: "02",
+    client: "Client TBD",
+    hook: "Building a brand from zero.",
+    image: workIcode,
+    soon: true,
+  },
+  {
+    n: "03",
+    client: "Client TBD",
+    hook: "Repositioning an existing brand.",
+    image: workIcode,
+    soon: true,
+  },
 ];
 
 const METHOD = [
-  { title: "Reset", lead: "Understand the problem.", body: "We audit the brand, audience, positioning, content and marketing ecosystem.", icon: RotateCcw },
-  { title: "Define", lead: "Find the signal.", body: "We clarify what makes the brand different and what it should be known for.", icon: Target },
-  { title: "Build", lead: "Turn the strategy into creative.", body: "Identity, campaigns, content and experiences.", icon: Layers },
-  { title: "Distribute", lead: "Put it in front of the right people.", body: "Social, digital, campaigns and community.", icon: Send },
-  { title: "Evolve", lead: "Learn. Adapt. Grow.", body: "We measure what's working and continually improve.", icon: TrendingUp },
+  {
+    title: "Reset",
+    lead: "Understand the problem.",
+    body: "We audit the brand, audience, positioning, content and marketing ecosystem.",
+    icon: RotateCcw,
+  },
+  {
+    title: "Define",
+    lead: "Find the signal.",
+    body: "We clarify what makes the brand different and what it should be known for.",
+    icon: Target,
+  },
+  {
+    title: "Build",
+    lead: "Turn the strategy into creative.",
+    body: "Identity, campaigns, content and experiences.",
+    icon: Layers,
+  },
+  {
+    title: "Distribute",
+    lead: "Put it in front of the right people.",
+    body: "Social, digital, campaigns and community.",
+    icon: Send,
+  },
+  {
+    title: "Evolve",
+    lead: "Learn. Adapt. Grow.",
+    body: "We measure what's working and continually improve.",
+    icon: TrendingUp,
+  },
 ];
 
 function Logo({ className = "h-7" }: { className?: string }) {
@@ -251,7 +283,10 @@ function FortyPage() {
       </header>
 
       {/* HERO */}
-      <section id="top" className="grain relative z-0 flex min-h-0 items-start overflow-hidden sm:min-h-[82vh] sm:items-center lg:min-h-[44rem]">
+      <section
+        id="top"
+        className="grain relative z-0 flex min-h-0 items-start overflow-hidden sm:min-h-[82vh] sm:items-center lg:min-h-[44rem]"
+      >
         <div
           aria-hidden
           className="pointer-events-none absolute -right-40 top-1/4 h-[38rem] w-[38rem] rounded-full opacity-[0.07]"
@@ -259,7 +294,10 @@ function FortyPage() {
         />
         <div className="mx-auto w-full max-w-7xl px-5 pb-6 pt-16 sm:px-8 sm:pb-12 sm:pt-20 lg:pb-16">
           <Reveal>
-            <p className="eyebrow flex flex-wrap items-center gap-x-2 gap-y-1" aria-label="Strategy, Creative, Distribution">
+            <p
+              className="eyebrow flex flex-wrap items-center gap-x-2 gap-y-1"
+              aria-label="Strategy, Creative, Distribution"
+            >
               {PILLARS.map((pillar, index) => (
                 <span
                   key={pillar.title}
@@ -267,20 +305,22 @@ function FortyPage() {
                     activePillar === index ? "text-gold opacity-100" : "text-cream/35 opacity-70"
                   }`}
                 >
-                  {pillar.title}{index < PILLARS.length - 1 ? "." : ""}
+                  {pillar.title}
+                  {index < PILLARS.length - 1 ? "." : ""}
                 </span>
               ))}
             </p>
           </Reveal>
           <Reveal delay={90}>
             <h1 className="display-xl mt-6 max-w-5xl text-[2.6rem] sm:mt-8 sm:text-6xl lg:text-[5.2rem]">
-              We build brands people <span className="text-gold">notice</span>, remember, and choose.
+              We build brands people <span className="text-gold">notice</span>, remember, and
+              choose.
             </h1>
           </Reveal>
           <Reveal delay={180}>
             <p className="mt-6 max-w-xl text-base leading-relaxed text-cream/65 sm:mt-9 sm:text-lg">
-              FORTY is a creative marketing agency helping ambitious businesses turn their ideas into
-              brands, content and campaigns that move people.
+              FORTY is a creative marketing agency helping ambitious businesses turn their ideas
+              into brands, content and campaigns that move people.
             </p>
           </Reveal>
           <Reveal delay={260}>
@@ -305,118 +345,135 @@ function FortyPage() {
       </section>
 
       {/* SERVICES — cards straddle hero / light section boundary */}
-      <section id="services" className="section-light relative overflow-visible px-5 pb-12 pt-6 sm:px-8 sm:pb-24 sm:pt-12">
+      <section
+        id="services"
+        className="section-light relative overflow-visible px-5 pb-12 pt-6 sm:px-8 sm:pb-24 sm:pt-12"
+      >
         <div aria-hidden className="absolute inset-x-0 top-0 h-[27%] bg-navy sm:h-[30%]" />
         {/* Floating breakout card composition */}
         <div className="relative z-10 w-full overflow-visible px-5 lg:px-8">
           <div className="relative mx-auto w-full max-w-[95rem] overflow-hidden py-6 sm:overflow-visible lg:max-w-[90rem]">
             <div
               className={`flex items-stretch gap-0 transition-transform duration-500 ease-out sm:grid sm:grid-cols-3 sm:gap-5 sm:translate-x-0 lg:gap-10 ${
-                activeService === 0 ? "translate-x-0" : activeService === 1 ? "-translate-x-full" : "-translate-x-[200%]"
+                activeService === 0
+                  ? "translate-x-0"
+                  : activeService === 1
+                    ? "-translate-x-full"
+                    : "-translate-x-[200%]"
               }`}
             >
               {PILLARS.map((p, i) => {
-              const layer = i === 1 ? "z-20" : "z-10";
-              return (
-                <Reveal
-                  key={p.title}
-                  delay={i * 100}
-                  className={`relative ${layer} w-full shrink-0 self-stretch sm:min-w-[15rem] sm:w-auto sm:shrink`}
-                >
-                  <article className="group relative flex min-h-full flex-col rounded-xl border border-navy/10 bg-cream p-4 pb-20 shadow-[0_1px_2px_rgba(11,21,38,0.06),0_8px_24px_-12px_rgba(11,21,38,0.12)] transition-all duration-300 hover:-translate-y-1.5 hover:border-gold/40 hover:shadow-[0_2px_4px_rgba(11,21,38,0.06),0_20px_40px_-16px_rgba(11,21,38,0.22)] sm:p-8 sm:pb-12 lg:p-10 lg:pb-14">
-                    <div className="flex items-start justify-between">
-                      <span className="grid h-10 w-10 place-items-center rounded-lg border border-gold/30 bg-gold/10 text-gold transition-colors duration-300 group-hover:bg-gold group-hover:text-navy sm:h-14 sm:w-14">
-                        <p.icon className="h-4 w-4 sm:h-6 sm:w-6" strokeWidth={1.5} />
-                      </span>
-                      <span className="font-display text-[0.55rem] tracking-[0.2em] text-navy/30 sm:text-xs sm:tracking-[0.3em]">
-                        {p.n}
-                      </span>
-                    </div>
-                    <h3 className="display-xl mt-3 text-sm text-navy sm:mt-8 sm:text-2xl">{p.title}</h3>
-                    <p className={`mt-4 text-xs leading-relaxed text-navy/65 sm:text-sm ${expandedService === i ? "block" : "hidden sm:block"}`}>
-                      {p.body}
-                    </p>
-                    <ul className={`mt-5 space-y-2 border-t border-navy/10 pt-4 sm:mt-8 sm:space-y-3 sm:pt-6 ${expandedService === i ? "block" : "hidden sm:block"}`}>
-                      {p.items.map((item) => (
-                        <li key={item} className="flex items-start gap-2 text-xs text-navy/75 sm:gap-3 sm:text-sm">
-                          <span className="mt-1.5 h-px w-3 shrink-0 bg-gold sm:mt-2 sm:w-4" />
-                          {item}
-                        </li>
-                      ))}
-                    </ul>
-                    <div className="absolute inset-x-4 bottom-4 flex items-center justify-between sm:static sm:mt-auto sm:block sm:pt-8">
-                      <a
-                        href={BOOKING_URL}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="hidden items-center gap-1 text-[0.55rem] uppercase tracking-[0.16em] text-gold transition-all duration-300 group-hover:gap-2 sm:inline-flex sm:text-[0.7rem] sm:tracking-[0.22em]"
+                const layer = i === 1 ? "z-20" : "z-10";
+                return (
+                  <Reveal
+                    key={p.title}
+                    delay={i * 100}
+                    className={`relative ${layer} w-full shrink-0 self-stretch sm:min-w-[15rem] sm:w-auto sm:shrink`}
+                  >
+                    <article className="group relative flex min-h-full flex-col rounded-xl border border-navy/10 bg-cream p-4 pb-20 shadow-[0_1px_2px_rgba(11,21,38,0.06),0_8px_24px_-12px_rgba(11,21,38,0.12)] transition-all duration-300 hover:-translate-y-1.5 hover:border-gold/40 hover:shadow-[0_2px_4px_rgba(11,21,38,0.06),0_20px_40px_-16px_rgba(11,21,38,0.22)] sm:p-8 sm:pb-12 lg:p-10 lg:pb-14">
+                      <div className="flex items-start justify-between">
+                        <span className="grid h-10 w-10 place-items-center rounded-lg border border-gold/30 bg-gold/10 text-gold transition-colors duration-300 group-hover:bg-gold group-hover:text-navy sm:h-14 sm:w-14">
+                          <p.icon className="h-4 w-4 sm:h-6 sm:w-6" strokeWidth={1.5} />
+                        </span>
+                        <span className="font-display text-[0.55rem] tracking-[0.2em] text-navy/30 sm:text-xs sm:tracking-[0.3em]">
+                          {p.n}
+                        </span>
+                      </div>
+                      <h3 className="display-xl mt-3 text-sm text-navy sm:mt-8 sm:text-2xl">
+                        {p.title}
+                      </h3>
+                      <p
+                        className={`mt-4 text-xs leading-relaxed text-navy/65 sm:text-sm ${expandedService === i ? "block" : "hidden sm:block"}`}
                       >
-                        {p.cta} <span aria-hidden>→</span>
-                      </a>
-                      <div className="flex w-full items-end justify-between gap-3 sm:hidden">
-                        <div className="flex flex-col items-start gap-1">
-                          <button
-                            type="button"
-                            onClick={() => setExpandedService((current) => (current === i ? null : i))}
-                            className="rounded-[4px] border border-gold px-1.5 py-1 text-[0.6rem] uppercase tracking-[0.18em] text-gold transition-colors hover:bg-gold hover:text-navy"
+                        {p.body}
+                      </p>
+                      <ul
+                        className={`mt-5 space-y-2 border-t border-navy/10 pt-4 sm:mt-8 sm:space-y-3 sm:pt-6 ${expandedService === i ? "block" : "hidden sm:block"}`}
+                      >
+                        {p.items.map((item) => (
+                          <li
+                            key={item}
+                            className="flex items-start gap-2 text-xs text-navy/75 sm:gap-3 sm:text-sm"
                           >
-                            {expandedService === i ? "View less" : "View more"}
-                          </button>
-                          <a
-                            href={BOOKING_URL}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="inline-flex rounded-[4px] border border-gold px-1.5 py-1 text-[0.55rem] uppercase tracking-[0.16em] text-gold transition-colors hover:bg-gold hover:text-navy"
-                          >
-                            {p.cta} <span aria-hidden>→</span>
-                          </a>
-                        </div>
-                        <div className="flex gap-2">
-                        {i > 0 && (
-                          <button
-                            type="button"
-                            onClick={() => {
-                              setActiveService(i - 1);
-                              setExpandedService(null);
-                            }}
-                            aria-label={`View ${PILLARS[i - 1].title}`}
-                            title={`View ${PILLARS[i - 1].title}`}
-                            className="grid h-9 w-9 place-items-center border border-gold text-gold transition-colors hover:bg-gold hover:text-navy"
-                          >
-                            <ArrowLeft className="h-4 w-4" />
-                          </button>
-                        )}
-                        {i < PILLARS.length - 1 && (
-                          <button
-                            type="button"
-                            onClick={() => {
-                              setActiveService(i + 1);
-                              setExpandedService(null);
-                            }}
-                            aria-label={`View ${PILLARS[i + 1].title}`}
-                            title={`View ${PILLARS[i + 1].title}`}
-                            className="grid h-9 w-9 place-items-center border border-gold text-gold transition-colors hover:bg-gold hover:text-navy"
-                          >
-                            <ArrowRight className="h-4 w-4" />
-                          </button>
-                        )}
+                            <span className="mt-1.5 h-px w-3 shrink-0 bg-gold sm:mt-2 sm:w-4" />
+                            {item}
+                          </li>
+                        ))}
+                      </ul>
+                      <div className="absolute inset-x-4 bottom-4 flex items-center justify-between sm:static sm:mt-auto sm:block sm:pt-8">
+                        <a
+                          href={BOOKING_URL}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="hidden items-center gap-1 text-[0.55rem] uppercase tracking-[0.16em] text-gold transition-all duration-300 group-hover:gap-2 sm:inline-flex sm:text-[0.7rem] sm:tracking-[0.22em]"
+                        >
+                          {p.cta} <span aria-hidden>→</span>
+                        </a>
+                        <div className="flex w-full items-end justify-between gap-3 sm:hidden">
+                          <div className="flex flex-col items-start gap-1">
+                            <button
+                              type="button"
+                              onClick={() =>
+                                setExpandedService((current) => (current === i ? null : i))
+                              }
+                              className="rounded-[4px] border border-gold px-1.5 py-1 text-[0.6rem] uppercase tracking-[0.18em] text-gold transition-colors hover:bg-gold hover:text-navy"
+                            >
+                              {expandedService === i ? "View less" : "View more"}
+                            </button>
+                            <a
+                              href={BOOKING_URL}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="inline-flex rounded-[4px] border border-gold px-1.5 py-1 text-[0.55rem] uppercase tracking-[0.16em] text-gold transition-colors hover:bg-gold hover:text-navy"
+                            >
+                              {p.cta} <span aria-hidden>→</span>
+                            </a>
+                          </div>
+                          <div className="flex gap-2">
+                            {i > 0 && (
+                              <button
+                                type="button"
+                                onClick={() => {
+                                  setActiveService(i - 1);
+                                  setExpandedService(null);
+                                }}
+                                aria-label={`View ${PILLARS[i - 1].title}`}
+                                title={`View ${PILLARS[i - 1].title}`}
+                                className="grid h-9 w-9 place-items-center border border-gold text-gold transition-colors hover:bg-gold hover:text-navy"
+                              >
+                                <ArrowLeft className="h-4 w-4" />
+                              </button>
+                            )}
+                            {i < PILLARS.length - 1 && (
+                              <button
+                                type="button"
+                                onClick={() => {
+                                  setActiveService(i + 1);
+                                  setExpandedService(null);
+                                }}
+                                aria-label={`View ${PILLARS[i + 1].title}`}
+                                title={`View ${PILLARS[i + 1].title}`}
+                                className="grid h-9 w-9 place-items-center border border-gold text-gold transition-colors hover:bg-gold hover:text-navy"
+                              >
+                                <ArrowRight className="h-4 w-4" />
+                              </button>
+                            )}
+                          </div>
                         </div>
                       </div>
-                    </div>
-                  </article>
-                </Reveal>
-              );
+                    </article>
+                  </Reveal>
+                );
               })}
             </div>
           </div>
         </div>
 
-
         <div className="mx-auto mt-8 max-w-7xl sm:mt-10">
           <Reveal delay={120}>
             <p className="mx-auto max-w-3xl text-center text-base leading-relaxed text-navy/70 sm:text-lg">
-              Strategy → Creative → Distribution. That's how we build brands that don't just look good
-              — they move.
+              Strategy → Creative → Distribution. That's how we build brands that don't just look
+              good — they move.
             </p>
           </Reveal>
         </div>
@@ -445,17 +502,23 @@ function FortyPage() {
                 Clear thinking. Bold creative. Work that reaches people.
               </h2>
               <p className="mt-6 max-w-xl text-base leading-relaxed text-navy/70">
-                We start by understanding the problem, define the strongest direction, build the work,
-                and get it in front of the people who matter.
+                We start by understanding the problem, define the strongest direction, build the
+                work, and get it in front of the people who matter.
               </p>
               <blockquote className="mt-12 flex min-h-48 items-end border-l-2 border-gold py-2 pl-6 font-display text-4xl uppercase leading-[0.94] tracking-[0.02em] text-navy sm:min-h-56 sm:pl-8 sm:text-5xl lg:min-h-64 lg:text-[4rem]">
                 Good marketing gets attention. Great brands earn attention.
               </blockquote>
             </Reveal>
           </div>
-          <Reveal delay={120} className="flex flex-col self-stretch border border-navy/15 bg-navy p-7 text-cream sm:p-10" id="contact">
+          <Reveal
+            delay={120}
+            className="flex flex-col self-stretch border border-navy/15 bg-navy p-7 text-cream sm:p-10"
+            id="contact"
+          >
             <p className="eyebrow">Free Consultation</p>
-            <h2 className="display-xl mt-5 text-2xl sm:text-3xl">Schedule your free consultation.</h2>
+            <h2 className="display-xl mt-5 text-2xl sm:text-3xl">
+              Schedule your free consultation.
+            </h2>
             <p className="mt-4 text-sm leading-relaxed text-cream/65">
               Tell us a little about your project and we'll be in touch to arrange a time.
             </p>
@@ -486,7 +549,10 @@ function FortyPage() {
                   <p className="mt-1 text-sm leading-relaxed text-navy/55">{s.body}</p>
                 </div>
                 {i < METHOD.length - 1 && (
-                  <span aria-hidden="true" className="absolute -right-8 top-3 flex items-center text-gold">
+                  <span
+                    aria-hidden="true"
+                    className="absolute -right-8 top-3 flex items-center text-gold"
+                  >
                     <span className="h-px w-4 bg-gold" />
                     <ArrowRight className="h-4 w-4" strokeWidth={1.5} />
                   </span>
@@ -506,12 +572,22 @@ function FortyPage() {
               <div className="marquee-track flex w-max shrink-0 items-center gap-10 pr-10 sm:gap-16 sm:pr-16">
                 {[...CLIENTS, ...CLIENTS].map((client, i) => (
                   <div key={`${client.name}-${i}`} className="flex shrink-0 items-center gap-3">
-                    <span className="grid h-11 w-11 place-items-center border border-navy/20 bg-navy text-xs font-semibold tracking-[0.04em] text-gold">
-                      {client.mark}
-                    </span>
-                    <span className="whitespace-nowrap font-display text-sm uppercase tracking-[0.22em] text-navy/55">
-                      {client.name}
-                    </span>
+                    {client.logo ? (
+                      <img
+                        src={client.logo}
+                        alt={`${client.name} logo`}
+                        className="h-auto w-28 object-contain sm:w-36"
+                      />
+                    ) : (
+                      <>
+                        <span className="grid h-11 w-11 place-items-center border border-navy/20 bg-navy text-xs font-semibold tracking-[0.04em] text-gold">
+                          {client.mark}
+                        </span>
+                        <span className="whitespace-nowrap font-display text-sm uppercase tracking-[0.22em] text-navy/55">
+                          {client.name}
+                        </span>
+                      </>
+                    )}
                   </div>
                 ))}
               </div>
@@ -527,7 +603,9 @@ function FortyPage() {
             <div>
               <p className="eyebrow">Meet The Lead</p>
               <h3 className="display-xl mt-4 text-2xl sm:text-3xl">FORTY Lead</h3>
-              <p className="mt-2 text-[0.65rem] uppercase tracking-[0.24em] text-gold">Founder &amp; CEO</p>
+              <p className="mt-2 text-[0.65rem] uppercase tracking-[0.24em] text-gold">
+                Founder &amp; CEO
+              </p>
               <a
                 href="mailto:ceo@forty.example"
                 className="mt-3 inline-block text-sm text-cream/70 transition-colors hover:text-gold"
@@ -535,13 +613,12 @@ function FortyPage() {
                 ceo@forty.example
               </a>
               <p className="mt-5 max-w-2xl text-sm leading-relaxed text-cream/65 sm:text-base">
-                A strategy-first creative leader helping ambitious businesses find their signal, build
-                work people remember, and take it to the audiences that matter.
+                A strategy-first creative leader helping ambitious businesses find their signal,
+                build work people remember, and take it to the audiences that matter.
               </p>
             </div>
           </article>
         </Reveal>
-
       </section>
 
       {/* THE RESET */}
@@ -555,7 +632,9 @@ function FortyPage() {
           <Reveal>
             <p className="eyebrow">The Reset</p>
             <h2 className="display-xl mt-6 text-3xl sm:text-5xl">Your brand needs a reset.</h2>
-            <p className="mt-6 text-lg text-gold">Don't know what's wrong with your marketing? We do.</p>
+            <p className="mt-6 text-lg text-gold">
+              Don't know what's wrong with your marketing? We do.
+            </p>
             <p className="mx-auto mt-6 max-w-xl text-sm leading-relaxed text-cream/65 sm:text-base">
               45–60 minutes. We'll identify what's working, what's broken, and what's missing — and
               leave you with 3 priority moves for your brand.
@@ -681,7 +760,9 @@ function WorkCarousel() {
               aria-label={`View ${study.client}`}
               aria-current={selectedIndex === index ? "true" : undefined}
               className={`grid h-9 w-9 place-items-center border font-display text-[0.65rem] tracking-[0.15em] transition-colors ${
-                selectedIndex === index ? "border-gold bg-gold text-navy" : "border-navy/20 text-navy/60 hover:border-gold hover:text-gold"
+                selectedIndex === index
+                  ? "border-gold bg-gold text-navy"
+                  : "border-navy/20 text-navy/60 hover:border-gold hover:text-gold"
               }`}
             >
               {study.n}
