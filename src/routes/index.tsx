@@ -1,5 +1,4 @@
 import { createFileRoute } from "@tanstack/react-router";
-import emailjs from "@emailjs/browser";
 import { useEffect, useRef, useState, type FormEvent } from "react";
 import useEmblaCarousel from "embla-carousel-react";
 import {
@@ -17,7 +16,9 @@ import {
 } from "lucide-react";
 import { Reveal } from "@/components/Reveal";
 import logo from "@/assets/forty-logo.png";
+import founderImage from "@/assets/Fortylead.png";
 import iCodeLogo from "@/assets/i-code_logo_v2.png";
+import jasiriLogo from "@/assets/jasiri.png";
 import workIcode from "@/assets/work-icode.jpg";
 
 // TODO: REPLACE_BOOKING_URL — swap this placeholder for the real Google Form link.
@@ -53,7 +54,7 @@ const NAV = [
 
 const CLIENTS = [
   { name: "iCode", mark: "iC", logo: iCodeLogo },
-  { name: "Client 02", mark: "02" },
+  { name: "Jasiri", mark: "Ja", logo: jasiriLogo },
   { name: "Client 03", mark: "03" },
   { name: "Client 04", mark: "04" },
   { name: "Client 05", mark: "05" },
@@ -590,6 +591,8 @@ function FortyPage() {
                       <img
                         src={client.logo}
                         alt={`${client.name} logo`}
+                        loading="lazy"
+                        decoding="async"
                         className="h-auto w-28 object-contain sm:w-36"
                       />
                     ) : (
@@ -611,9 +614,13 @@ function FortyPage() {
 
         <Reveal delay={180}>
           <article className="mx-auto mt-8 grid max-w-5xl gap-8 rounded-[8px] border border-navy/15 bg-navy p-7 text-cream sm:mt-12 sm:p-10 md:grid-cols-[auto_1fr] md:items-center md:gap-10">
-            <div className="grid h-28 w-28 place-items-center rounded-full border border-gold/50 bg-navy-soft font-display text-2xl tracking-[0.16em] text-gold sm:h-36 sm:w-36 sm:text-3xl">
-              FL
-            </div>
+            <img
+              src={founderImage}
+              alt="FORTY founder"
+              loading="lazy"
+              decoding="async"
+              className="aspect-square h-32 w-32 shrink-0 rounded-full border border-gold/50 object-cover object-center sm:h-36 sm:w-36"
+            />
             <div>
               <p className="eyebrow">Meet The Lead</p>
               <h3 className="display-xl mt-4 text-2xl sm:text-3xl">FORTY Lead</h3>
@@ -874,6 +881,7 @@ function ContactForm() {
     setError(false);
 
     try {
+      const emailjs = await import("@emailjs/browser");
       await emailjs.sendForm("service_5qhb6fe", "template_s12h12v", form.current, {
         publicKey: "bO3lNpAsCz4S9IP0b",
       });
